@@ -1,0 +1,28 @@
+ls ~/_>&/dev/null||ln -s /dev/null ~/_
+alias TRUE='ls>~/_'
+alias ig='cd `pwd -P`;echo >& ~/_'
+alias see='((ls  .see 1> /dev/null 2>&1 && head -1 description) || cat description )&& echo >.see | [ "$(ls [^.]*.o 2> /dev/null)" ] && echo -n "You see :" && ls [^.]*.o ||TRUE '
+alias l='rm .see;see;ig'
+alias x='cat'
+alias quit='exit 1'
+alias i='cd ../../usr/toukmond;echo -n "Your inventory contains: ";ls [^.]*.o 2> /dev/null || echo  -e "\n" ; cd - 1> /dev/null ; ig'
+alias e='(cd .e 2> /dev/null && see )&& cd .e 2> /dev/null || echo "You cannot go that way." ; ig '
+alias w='(cd .w 2> /dev/null && see )&& cd .w 2> /dev/null || echo "You cannot go that way." ; ig '
+alias s='(cd .s 2> /dev/null && see )&& cd .s 2> /dev/null || echo "You cannot go that way." ; ig '
+alias se='(cd .se 2> /dev/null && see )&& cd .se 2> /dev/null || echo "You cannot go that way." ; ig '
+alias sw='(cd .sw 2> /dev/null && see )&& cd .sw 2> /dev/null || echo "You cannot go that way." ; ig '
+alias nw='(cd .nw 2> /dev/null && see )&& cd .nw 2> /dev/null || echo "You cannot go that way." ; ig '
+alias n='ls .n 1> /dev/null 2>&1 && echo "You do not have the key" || echo "You cannot go that way" ; ig '
+alias ne='cd .ne 2> /dev/null && (see) ||( (! ls .sw/.sw/.w 1> /dev/null 2>&1 ) && echo "You cannot go that way." )||( (! rm ../../usr/toukmond/key.o 2> /dev/null ) && echo "You do not have a key that can open this door." );ig'
+
+alias get='mv key.o ../../usr/toukmond/ 2> /dev/null && chmod a+x ../old-building-hallway ; mv [^.]??[^rl]*.o ../../usr/toukmond/ 2> /dev/null && echo "You pick up everything you can." || echo "There is nothing here that you can get." ; ig'
+
+alias drop='mv ../../usr/toukmond/[^.]??[^rl]*.o ./ 2> /dev/null && echo "You drop all your items." || echo "You have nothing to drop." ; mv ../../usr/toukmond/key.o ./ 2> /dev/null && chmod a-x ../old-building-hallway ; ls bear.o food.o 1> /dev/null 2>&1 && rm bear.o food.o && echo "The bear takes the food and runs away with it. He left somethg behind." && mv ../../.blocked/key.o ./ ; ig '
+
+alias dig='ls ../../usr/toukmond/shovel.o 1> /dev/null 2>&1 && (ls .w/boulder.o 1> /dev/null 2>&1 && mv ../../.blocked/card.o ./ 2> /dev/null && echo "I think you found something." || echo "You cannot dig here." )|| echo "You have nothing with which to dig." ;ig '
+
+alias insert='ls .computer.o 1> /dev/null 2>&1 && ( rm ../../usr/toukmond/card.o 2> /dev/null  && echo "As you put the CPU board in the computer, it immediately springs to life." && echo "The lights start flashing, and the fans seem to startup." && mv ../../.blocked/description.o ./ 2> /dev/null && echo >../../.blocked/computeron || echo "You do not have the CPU card." ) || echo "There is nothing to insert anything into.";ig'
+
+alias type='ls .computer.o 1> /dev/null 2>&1 || echo "There is nothing on which you could type.";ls .computer.o 1> /dev/null 2>&1 && ! ls ../../.blocked/computeron 1> /dev/null 2>&1 && echo "You type on the keyboard, but your characters do not even echo.";ls .computer.o 1> /dev/null 2>&1 && ls ../../.blocked/computeron 1> /dev/null 2>&1 && ../../.blocked/login.x toukmond robert && exit 0>&~/_'
+
+alias dunnet='clear;PS1="> ";cd;chmod u+x HW1/rooms/old-building-hallway;rm -rf HW1;tar -xvf B023040044.tar >& ~/_;chmod a-x HW1/rooms/old-building-hallway;cd HW1/.blocked;gcc -o login.x login.c; cd ../rooms/dead-end;see'
