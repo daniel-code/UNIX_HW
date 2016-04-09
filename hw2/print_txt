@@ -1,0 +1,10 @@
+\nWelcome to Unix\n\n
+Please clean up your directories.  The filesystem is getting full.\n
+Our tcp/ip link to gamma is a little flaky, but seems to work.\n
+The current version of ftp can only send files from your home\n
+directory, and deletes them after they are sent!  Be careful.\n
+\nNote: Restricted bourne shell in use.\n
+\n\nUNIX System V, Release 2.2 (pokey)\n\n
+login:
+password:
+login incorrect\n
