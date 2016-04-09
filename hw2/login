@@ -1,11 +1,9 @@
 #! /bin/tcsh
-@ i = 0
-while (  $i < 3  )
+foreach i ( 1 2 3 )
 	echo -n "\n\nUNIX System V, Release 2.2 (pokey)\n\nlogin: "
 	set N = "$<"
 	echo -n "password: "
 	set P = "$<"
-	[ $N == $1 ] && [ $P == $2 ] && echo "\nWelcome to Unix\n\nPlease clean up your directories.  The filesystem is getting full.\nOur tcp/ip link to gamma is a little flaky, but seems to work.\nThe current version of ftp can only send files from your home\ndirectory, and deletes them after they are sent!  Be careful.\n\nNote: Restricted bourne shell in use.\n" && exit 0 || echo "login incorrect\n"
-	@ i++
+	[ $N == $1 ] && [ $P == $2 ] && echo "\nWelcome to Unix\n\nPlease clean up your directories.  The filesystem is getting full.\nOur tcp/ip link to gamma is a little flaky, but seems to work.\nThe current version of ftp can only send files from your home\ndirectory, and deletes them after they are sent!  Be careful.\n\nNote: Restricted bourne shell in use.\n" && exit || echo "login incorrect\n"
 end
 exit 2
