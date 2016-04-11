@@ -4,6 +4,8 @@ foreach i ( 1 2 3 )
 	e
 	e
 	e "UNIX System V, Release 2.2 (pokey)"
+	e
+	e
 	e -n "login: "
 	set N = "$<"
 	e -n "password: "
@@ -11,6 +13,7 @@ foreach i ( 1 2 3 )
 	while(  "$N" == "$1"  &&  "$P" == "$2"  ) 
 	e	
 	e "Welcome to Unix"
+	e
 	e
 	e "Please clean up your directories.  The filesystem is getting full."
 	e "Our tcp/ip link to gamma is a little flaky, but seems to work."
