@@ -1,2 +1,2 @@
 #!/usr/bin/tcsh
-echo  ABCDEFGHIJKLMNOPQRSTUVWX
+echo  ABCDEFGHIJKLMNOPQRSTUVWX | fgrep -o --color "[A-X]" | 
