@@ -460,7 +460,7 @@ __1__: This blank requires you to find a regular expression that matches to the
        regular expression, you won't just get rid of the unwanted numbers, you
        will also get rid of their newline symbols.
        So, instead, we need to do something odd. If we ask for context in grep,
-       it will put a -- between the contexts. For example:
+       it will put a -- between the cogrntexts. For example:
        % seq 10 | grep -C1 "[38]"
        2
        3

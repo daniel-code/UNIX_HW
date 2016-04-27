@@ -1,6 +1,0 @@
-#!/usr/bin/tcsh
-echo  ABCDEFGHIJKLMNOPQRSTUVWX | grep -on "[A-X]" | tr -d "1" | tee letters | tr "A-Z" "a-z" >> letters
-sort -R letters | tr "a-z\n:" "A-Z; " > memboard
-set row = 0
-set col = 0
-set counter = 0
