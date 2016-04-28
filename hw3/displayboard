@@ -10,7 +10,7 @@ endif
 grep -E -o "[A-Z_]" memboard | cat -n > memboard_list
 grep -E "[^0-9]$1[^0-9]|[^0-9]$2[^0-9]"  memboard_list > match_list
 set return = `grep -E -o "[A-Z]" match_list | uniq -c | wc -l`
-grep -E -v "[ ]$1[ ]|[ ]$2[ ]" memboard_list | tr "A-Z" "?" >> match_list
+grep -E -v "[^0-9]$1[^0-9]|[^0-9]$2[^0-9]" memboard_list | tr "A-Z" "?" >> match_list
 sort -n match_list | tr -cd "A-Z_?\t\n" | tr "\t\n" " ," > memboard2
 echo "   a  b  c  d  e  f  g  h\n"
 grep -E -on "([ ][A-Z?_][,]){8}" memboard2 | grep -E -on "([ ][A-Z?_][,]){8}" | tr ":," "  " > tempfile

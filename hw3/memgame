@@ -9,7 +9,7 @@ while 1
 	if( X$? == X1 )then
 		cat memboard | tr `head -1 match_list| tr -cd "A-Z"` "_" > temp
 		cat temp > memboard
-		grep -E "(_,){48}" memboard && echo "Mission complete!\nMove : $counter" && exit
+		grep -E "(_,){48}" memboard >&/dev/null && echo "Mission complete!\nMove : $counter" && exit
 	endif
 	./getchoice 0
 	set x = $?
