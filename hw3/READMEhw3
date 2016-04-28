@@ -177,14 +177,11 @@ Learned. These blanks will now be individually described:
 
 __2__: This command removes the numbers from the input stream.
 
-__3__: This command is involved in making the letters each appear twice (recall
-       that the above discussion of Line 2 has already said that the final
-       output will have upper and lower case letters). Note also that I did not
-       say that this command finishes the task, just that it starts it.
-
-       What this command does is to send the input stream to a file (in this
-       case, the file is "letters") while also passing the input stream onward
-       to the output stream.
+__3__: Originally, I wanted you to put a "tee letters" here. But then some
+       students have told me that their versions of UNIX did not want to
+       allow the same output file twice in the same pipe sequence. So, if
+       "| tee letters |" does not work for you, then type here instead
+       "> tempfile; copy tempfile letters; cat tempfile |"
 
 __4__: This command makes the input stream lower case.
 
@@ -436,12 +433,20 @@ The way to get this double-spacing is clever. It uses sort to intersperse the
 numbers created on Line 6 between the rows created on Line 5, then to remove
 the numbers, so that we are left with empty lines between the rows.
 
-The format of the line is:
-
+The format of the line was originally given as:
 sort gt | grep __1__ | __2__
 
-After the sort, you will have:
-0
+But, following some comments from the students, I found 2 problems. First, the
+sort gt was incorrect, because gt was a typo. Second, some students said that
+their grep did not behave the same as mine, when it needed to print zero lines
+of context. So after revising the line, this is now what its format should be:
+sort __1__ | u2d | tr "\r0" "-" | grep -o -e "--" -e "....*[^-]" | __2__
+
+__1__: The original README file had a "gt" here. But what actually goes here is
+       the filename in __4__ from Line 5.
+
+After the sort, you will have (note there was a typo in the earlier README,
+because the lines below had incorrectly also contained a "0" line):
 1  W  W  C  G  T  Q  N  P
 10
 2  O  L  E  N  U  V  K  M
@@ -452,41 +457,20 @@ After the sort, you will have:
 We want to get rid of the small lines but leave the large ones. Clearly, we
 can't just feed it into "tr -d 0-9", because that would kill the line numbers
 that we do want (i.e., the numbers from 1 to 6 at the front of the rows).
-So we have to do something tricky to get the result we want. Then what goes in
-the blanks?
+So we have to do something tricky to get the result we want. Originally, I
+wanted you to say "grep -C0 ..." at this point. But, with some students saying
+that their grep did not behave like mine, I've used u2d (which we learned) to
+instead achieve the same effect, as I have described in the new format, shown
+above. It is a bit tricky, but I did it for you, so no problem.
 
-__1__: This blank requires you to find a regular expression that matches to the
-       rows but not to the numbers 0,10,20,.... But if you just grep for that
-       regular expression, you won't just get rid of the unwanted numbers, you
-       will also get rid of their newline symbols.
-       So, instead, we need to do something odd. If we ask for context in grep,
-       it will put a -- between the contexts. For example:
-       % seq 10 | grep -C1 "[38]"
-       2
-       3
-       4
-       --
-       7
-       8
-       9
-       %
+At this pont, the output is:
+1  W  W  C  G  T  Q  N  P
+--
+2  O  L  E  N  U  V  K  M
+--
+3  B  M  K  A  H  ...
+       ...
 
-       But, if there are two matches that overlap in their contexts, then the
-       "--" does not print:
-       % seq 10 | grep -C1 "[35]"
-       2
-       3
-       4
-       5
-       6
-       %
-       
-       But what does this have to do with our present problem? Well, the "--"
-       separators are a consequence of asking for context -- even if you ask
-       for zero lines of context.
-
-       So ask for 0 lines of context and you will get the rows separated by
-       lines containing only "--"
 
 __2__: The goal of this blank is to remove the "--" lines (but leaving their
        newline characters).
@@ -809,3 +793,4 @@ __5__: To reach this point, the choice must be valid. So exit the script AND
 Lines 13-14:
 13:  echo "That place is already revealed. Please try again."
 14:end
+

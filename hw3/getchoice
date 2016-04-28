@@ -9,6 +9,6 @@ while 1
 	end
 	expr `echo $ch | grep -o "[A-Ha-h1-6]" | sort | tr "A-Ha-h\n" "1-81-8+" | grep -o "[0-9+]" | tr "\n" " " | xargs echo "8 \*"` -8 > position
 	set x = `cat position`
-	if( X$x != X$1 ) cat memboard | tr "," "\n" | grep -n "[A-Z]" | grep "^$x\:" && exit $x
+	if( X$x != X$1 ) cat memboard | tr "," "\n" | grep -n "[A-Z]" | grep "^$x\:" >&/dev/null && exit $x
 	echo "That place is already revealed. Please try again."
 end
