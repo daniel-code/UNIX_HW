@@ -1,0 +1,6 @@
+#!/usr/bin/tcsh
+echo ABCDEFGHIJKLMNOPQRSTUVWX | sed -n 's/[A-X]/&\n/gp' | tee memboard | tr " " "\n" | tr A-Z a-z > lets; cat memboard >> lets
+set arrayC = (`cat lets`)
+set arrayS = (`cat symbols | `)
+sed "y/$arrayC/$arrayS$arrayS/p"
+
