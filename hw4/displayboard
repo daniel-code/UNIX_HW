@@ -1,18 +1,14 @@
 #!/usr/bin/tcsh
 clear
 if ($3 == "X-c" ) then
-  echo "   a  b  c  d  e  f  g  h\n"
-  grep -o " ., ., ., ., ., ., ., ." memboard | grep -n .| tr ":," " " >gt
-  seq 10 10 50 >> gt
-  sort gt | grep -A0 ... | tr -d "-"
+  echo "   a  b  c  d  e  f  g  h"
+  cat memboard | sed 'N;N;N;N;N;N;N;s/\n/  /g' | sed '=' | sed 'N;s/\n/  /g' | sed -f sedfile > gt 
   echo "\n-------------------------\n"
-endif
-cat memboard | tr , '\n' | cat -n > f1
-grep -e " $1""[^0-9]" -e " $2""[^0-9]" f1 >f2
-@ m = `tr -dc "A-Z\n" < f2 | uniq | wc -l`    
-grep -v -e " $1""[^0-9]" -e " $2""[^0-9]" f1 | tr A-Z \? >> f2
-sort f2 | tr -d '0-9 ' | tr \\n\\t ,\  > f3
-echo "   a  b  c  d  e  f  g  h\n"
-grep -o " ., ., ., ., ., ., ., ." f3 | grep -n .| tr ":," " " >gt; seq 10 10 50 >> gt ; sort gt | grep -A0 ... | tr -d "-" | grep --color -e "[A-Z]" -e "^"
-echo 
-exit $m
+  endif
+cat memboard | sed -n " $1 bL;$2 bL;s/[A-Z]/?/;:L p" > f3
+echo "   a  b  c  d  e  f  g  h"
+cat f3 | sed 'N;N;N;N;N;N;N;s/\n/  /g' | sed '=' | sed 'N;s/\n/  /g' | sed -f sedfile | grep --color "[^A-Z0-9?]"
+echo
+set x = `cat f3 | sed -n '/[^?_]/p' | uniq -c | sed -n 's/[ ]*2 [^?_]/1/p'`
+if ( $x == 1 ) cat memboard | sed "$1 bL ; $2 bL ;b;:L s/[A-Z]/_/;" > f3
+exit $x
