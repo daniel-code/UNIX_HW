@@ -7,7 +7,6 @@ while 1
       echo "Invalid choice. Please try again."
   end
 set x = `echo $ch | sed 'y/abcdefgh/12345678/;s/[1-6]$/ + & * 8 - 8/' | xargs expr`
-echo $x
 ( expr $1 - $x && expr 1 + `cat memboard | sed -n "$x s/_//p;$x s/[A-Z]/1/p;"` ) >& /dev/null && exit $x
 echo "That place is already revealed. Please try again."
 end
