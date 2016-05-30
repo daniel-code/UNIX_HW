@@ -1,8 +1,8 @@
 #!/usr/bin/tcsh
 clear
-if ($3 == "X-c" ) then
+if ($3 == "-c" ) then
   echo "   a  b  c  d  e  f  g  h"
-  cat memboard | sed 'N;N;N;N;N;N;N;s/\n/  /g' | sed '=' | sed 'N;s/\n/  /g' | sed -f sedfile > gt 
+  cat memboard | sed 'N;N;N;N;N;N;N;s/\n/  /g' | sed '=' | sed 'N;s/\n/  /g' | sed -f sedfile
   echo "\n-------------------------\n"
   endif
 cat memboard | sed -n " $1 bL;$2 bL;s/[A-Z]/?/;:L p" > f3

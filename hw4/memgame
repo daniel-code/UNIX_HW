@@ -2,7 +2,7 @@
 echo ABCDEFGHIJKLMNOPQRSTUVWX | sed -n "s/[A-X]/&\n/g;s/\n//24;p" | tee memboard | tr " " "\n" | tr A-Z a-z > lets; cat memboard >> lets
 set arrayC = (`cat lets`)
 set arrayS = (`sort -R symbols | head -n 24`)
-echo \#\!"/usr/bin/sed -f\ny/$arrayC/$arrayS $arrayS/"> sedfile
+echo \#\!"/usr/bin/sed -f\ny/$arrayC/$arrayS $arrayS/;"> sedfile
 cat lets | sort -R | tr "a-z" "A-Z" > memboard
 @ choice1 = 50
 @ choice2 = 50
